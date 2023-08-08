@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% include 'header.html' %}
+
+{% block title %} Home {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron p-3">
+                <h2>Manage Your <b>Vehicle Here!</b>
+                    <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#mymodal">Add New Vehicle</button></h2>
+
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-success alert-dismissable" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">x</span>
+                    </button>
+                    {{ message }}
+                </div>
+                {% endfor %}
+                {% endif %}
+                {% endwith %}
+
+                <table class="table table-hover table-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Vehicle ID</th>
+                        <th>Timestamp</th>
+                        <th>Coordinate Longitude</th>
+                        <th>Coordinate Latitude</th>
+                        <th>Event Description</th>
+                        <th>Speed</th>
+                        <th>Heading</th>
+                        <th>Ignition State</th>
+                        <th>GPS Accuracy</th>
+                        <th>GPS Fix Type</th>
+                        <th>Action</th>
+                    </tr>
+                    {% for row in vehicles %}
+                    <tr>
+                        <td>{{ row.id }}</td>
+                        <td>{{ row.vehicleid }}</td>
+                        <td>{{ row.timestamp }}</td>
+                        <td>{{ row.coordinate_longitude }}</td>
+                        <td>{{ row.coordinate_latitude }}</td>
+                        <td>{{ row.event_description }}</td>
+                        <td>{{ row.speed }}</td>
+                        <td>{{ row.heading }}</td>
+                        <td>{{ row.ignitionState }}</td>
+                        <td>{{ row.gps_accuracy }}</td>
+                        <td>{{ row.gps_fix_type }}</td>
+                        <td>
+                            <a href="/update/{{ row.id }}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{ row.id }}">Edit</a>
+                            <a href="/delete/{{ row.id }}" class="btn btn-danger btn-xs" onclick="return confirm('Are You Sure To Delete ?')">DELETE</a>
+                        </td>
+                    </tr>
+
+                    <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Update Information</h4>
+                                </div>
+                                <form action="{{url_for('update')}}" method="POST" class="modal-body">
+                                    <input type="hidden" name="id" value="{{ row.id }}">
+                                    <div class="form-group">
+                                        <label for="vehicleid">Vehicle ID:</label>
+                                        <input type="text" class="form-control" name="vehicleid" value="{{ row.vehicleid }}" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="timestamp">Timestamp:</label>
+                                        <input type="text" class="form-control" name="timestamp" value="{{ row.timestamp }}" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="coordinate_longitude">Coordinate Longitude:</label>
+                                        <input type="text" class="form-control" name="coordinate_longitude" value="{{ row.coordinate_longitude }}" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="coordinate_latitude">Coordinate Latitude:</label>
+                                        <input type="text" class="form-control" name="coordinate_latitude" value="{{ row.coordinate_latitude }}" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="event_description">Event Description:</label>
+                                        <input type="text" class="form-control" name="event_description" value="{{ row.event_description }}" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="speed">Speed:</label>
+                                        <input type="text" class="form-control" name="speed" value="{{ row.speed }}" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="heading">Heading:</label>
+                                        <input type="text" class="form-control" name="heading" value="{{ row.heading }}" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ignitionState">Ignition State:</label>
+                                        <input type="text" class="form-control" name="ignitionState" value="{{ row.ignitionState }}" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gps_accuracy">GPS Accuracy:</label>
+                                        <input type="text" class="form-control" name="gps_accuracy" value="{{ row.gps_accuracy }}" required="1">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gps_fix_type">GPS Fix Type:</label>
+                                        <input type="text" class="form-control" name="gps_fix_type" value="{{ row.gps_fix_type }}" required="1">
+                                    </div>
+                                    <div class="form-group text-right">
+                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </table>
+            </div>
+            <div id="mymodal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add Vehicle</h4>
+                        </div>
+                        <form action="{{ url_for('insert') }}" method="POST" class="modal-body">
+                            <div class="form-group">
+                                <label for="vehicleid">Vehicle ID:</label>
+                                <input type="text" class="form-control" name="vehicleid" placeholder="Enter Vehicle ID" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="timestamp">Timestamp:</label>
+                                <input type="text" class="form-control" name="timestamp" placeholder="Enter Timestamp" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="coordinate_longitude">Coordinate Longitude:</label>
+                                <input type="text" class="form-control" name="coordinate_longitude" placeholder="Enter Coordinate Longitude" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="coordinate_latitude">Coordinate Latitude:</label>
+                                <input type="text" class="form-control" name="coordinate_latitude" placeholder="Enter Coordinate Latitude" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="event_description">Event Description:</label>
+                                <input type="text" class="form-control" name="event_description" placeholder="Enter Event Description" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="speed">Speed:</label>
+                                <input type="text" class="form-control" name="speed" placeholder="Enter Speed" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="heading">Heading:</label>
+                                <input type="text" class="form-control" name="heading" placeholder="Enter Heading" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="ignitionState">Ignition State:</label>
+                                <input type="text" class="form-control" name="ignitionState" placeholder="Enter Ignition State" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="gps_accuracy">GPS Accuracy:</label>
+                                <input type="text" class="form-control" name="gps_accuracy" placeholder="Enter GPS Accuracy" required="1">
+                            </div>
+                            <div class="form-group">
+                                <label for="gps_fix_type">GPS Fix Type:</label>
+                                <input type="text" class="form-control" name="gps_fix_type" placeholder="Enter GPS Fix Type" required="1">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-primary" type="submit">Add Vehicle</button>
+                            </div>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
