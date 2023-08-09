@@ -103,6 +103,11 @@ def insert():
         flash(f"An error occurred on {e} while adding the vehicle. Please check your input.")
 
     return redirect(url_for('Index'))
+
+@app.route('/map')
+def map_view():
+    all_data = Data.query.all()  # Fetch all vehicle data
+    return render_template("map.html", vehicles=all_data)
     
 @app.route('/update', methods=['POST'])
 def update():
