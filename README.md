@@ -6,13 +6,13 @@ The Vehicle Tracking Web Application is a Flask-based web application that allow
 
 The application follows a client-server architecture with the following key components:
 
-    Frontend: The frontend is built using HTML, Bootstrap for styling, and Jinja2 templating for dynamic rendering of data.
+*Frontend: The frontend is built using HTML, Bootstrap for styling, and Jinja2 templating for dynamic rendering of data.
 
-    Backend: The backend is implemented using Flask, a Python web framework. It handles routes, database interactions, and rendering templates.
+*Backend: The backend is implemented using Flask, a Python web framework. It handles routes, database interactions, and rendering templates.
 
-    Database: The app uses a MySQL database to store vehicle data. The SQLAlchemy ORM is employed to interact with the database.
+*Database: The app uses a MySQL database to store vehicle data. The SQLAlchemy ORM is employed to interact with the database.
 
-    Map Visualization: The Leaflet.js library is used for interactive map visualization, with vehicle markers representing location data.
+*Map Visualization: The Leaflet.js library is used for interactive map visualization, with vehicle markers representing location data.
 
 # Database Model
 
@@ -36,8 +36,8 @@ Follow these steps to launch the Vehicle Tracking Web App:
 
 1) Clone the Repository:
 
-git clone https://github.com/glennmkhonto/web-application.git
-cd web-application
+*git clone https://github.com/glennmkhonto/web-application.git
+*cd web-application
 
 2) Install Dependencies:
 
@@ -45,37 +45,37 @@ pip install -r requirements.txt
 
 3) Configure Database:
 
-    Open app.py and update the SQLALCHEMY_DATABASE_URI in the app.config section to your database connection string.
+*Open app.py and update the SQLALCHEMY_DATABASE_URI in the app.config section to your database connection string.
 
 4) CSV Data Upload:
 
-    Place your CSV file in the csv folder at the root of the project directory.
+*Place your CSV file in the csv folder at the root of the project directory.
 
-    Run the Flask app to upload data from the CSV file into the database:
+*Run the Flask app to upload data from the CSV file into the database:
 
-    python app.py
+*ython app.py
 
-    The CSV file will be moved to the processed folder after processing.
+*The CSV file will be moved to the processed folder after processing.
 
 Run the App:
 
-python app.py
+*python app.py
 
 Access the App:
 
-    Open your web browser and navigate to http://localhost:5000.
-    You can manage and visualize vehicle data using the provided web interface.
+*Open your web browser and navigate to http://localhost:5000.
+*You can manage and visualize vehicle data using the provided web interface.
 
 # Funtionality
 
     View Map:
-        To view the vehicle data on a map, click on the "View Map" link in the navigation menu.
+    *To view the vehicle data on a map, click on the "View Map" link in the navigation menu.
 
     Manage Vehicle Data:
-        You can manage vehicle data by adding, updating, and deleting records.
-        To add a new vehicle, click the "Add New Vehicle" button and fill in the details.
-        To update a vehicle's information, click the "Edit" button next to the respective record.
-        To delete a vehicle's record, click the "DELETE" button next to the respective record. A confirmation dialog will appear, then click "ok" if happy to proceed.
+    *You can manage vehicle data by adding, updating, and deleting records.
+    *To add a new vehicle, click the "Add New Vehicle" button and fill in the details.
+    *To update a vehicle's information, click the "Edit" button next to the respective record.
+    *To delete a vehicle's record, click the "DELETE" button next to the respective record. A confirmation dialog will appear, then click "ok" if happy to proceed.
 
 # Map Visualization
 
