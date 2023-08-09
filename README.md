@@ -30,6 +30,11 @@ The application's database model consists of a single table named Data, which in
     gps_accuracy: GPS accuracy.
     gps_fix_type: GPS fix type.
 
+
+# Makefile
+
+Use the make file to easily use commands to run
+
 # Launching the Application
 
 Follow these steps to launch the Vehicle Tracking Web App:
@@ -65,6 +70,20 @@ Access the App:
 
 *Open your web browser and navigate to http://localhost:5000.
 *You can manage and visualize vehicle data using the provided web interface.
+
+## Running the Application with Docker Compose
+
+To test the application using Docker Compose, follow these steps:
+
+1. Install Docker and Docker Compose on your system if you haven't already.
+4. Build the Docker images and start the containers: `docker-compose up --build`
+
+Once the containers are up and running, you can access the application by opening your web browser and navigating to http://localhost:5000.
+
+To stop the containers, press `Ctrl+C` in the terminal where you started Docker Compose. To remove the containers and associated resources, run `docker-compose down`.
+
+Note: You may need to adjust the configuration in the docker-compose.yml file to match your environment and application setup.
+
 
 # Funtionality
 
