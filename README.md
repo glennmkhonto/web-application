@@ -37,6 +37,7 @@ Follow these steps to launch the Vehicle Tracking Web App:
 1) Clone the Repository:
 
 git clone https://github.com/glennmkhonto/web-application.git
+
 cd web-application
 
 2) Install Dependencies:
