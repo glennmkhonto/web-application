@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.secret_key = "Secret key"
 
 # Set the database connection string
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myuser:mypassword@localhost/webappdb'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:password@database/webappdb'
 
 # Disable tracking modifications to reduce overhead
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False

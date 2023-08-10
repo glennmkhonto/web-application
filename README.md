@@ -47,6 +47,14 @@ The application now uses a PostgreSQL database to store vehicle data. Here's how
 
 2. **Configure Database Connection:**
 
+Run the following commands to apply the necessary migrations and create the required tables in your PostgreSQL database:
+* flask db init
+* flask db migrate -m "Initial migration"
+* flask db upgrade
+
+
+3. **Configure Database Connection:**
+
    Open the `app.py` file and locate the `app.config` section. Update the `SQLALCHEMY_DATABASE_URI` to connect to your PostgreSQL database:
 
    ```python
