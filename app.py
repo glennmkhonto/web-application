@@ -1,5 +1,4 @@
 from flask import Flask, render_template, flash, redirect, url_for, request
-from flask_sqlalchemy import SQLAlchemy
 from dbmodel import Data
 from db import db
 import pandas as pd
@@ -13,18 +12,14 @@ app = Flask(__name__)
 app.secret_key = "Secret key"
 
 # Set the database connection string
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:change%4090@web-application-database-1/webappdata'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://root:change%4090@localhost/webappdb'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://sibusisomkhonto:change%4090@localhost/webappdb'
-
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myuser:mypassword@localhost/webappdb'
 
 # Disable tracking modifications to reduce overhead
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#db = SQLAlchemy(app)
+
 db.init_app(app)
 migrate = Migrate(app, db)
-#db.init_app(app)
+
 print("Connecting to database:", app.config['SQLALCHEMY_DATABASE_URI'])
 
 # Function to upload data from CSV

@@ -9,10 +9,11 @@ services:
     environment:
       - FLASK_ENV=development
       - FLASK_APP=app.py
-    command: ["./wait-for-it.sh", "database:3306", "--", "python", "app.py"]
+    command: ["./wait-for-it.sh", "database:5432", "--", "python", "app.py"]
+
     
   database:
-    image: mysql:latest
+    image: postgres:latest 
     environment:
-      MYSQL_ROOT_PASSWORD: change%4090
-      MYSQL_DATABASE: webappdata
+      POSTGRES_PASSWORD: your_password
+      POSTGRES_DB: webappdb

@@ -10,7 +10,7 @@ The application follows a client-server architecture with the following key comp
 
 *Backend: The backend is implemented using Flask, a Python web framework. It handles routes, database interactions, and rendering templates.
 
-*Database: The app uses a MySQL database to store vehicle data. The SQLAlchemy ORM is employed to interact with the database.
+*Database: The app uses a Postgresql database to store vehicle data. The SQLAlchemy ORM is employed to interact with the database.
 
 *Map Visualization: The Leaflet.js library is used for interactive map visualization, with vehicle markers representing location data.
 
@@ -31,9 +31,27 @@ The application's database model consists of a single table named Data, which in
     gps_fix_type: GPS fix type.
 
 
+##### Be sure to enter your db password in docker-compose, Dockerfile and app.py  
+
 # Makefile
 
 Use the make file to easily use commands to run
+
+# Database Configuration
+
+The application now uses a PostgreSQL database to store vehicle data. Here's how you can configure the database:
+
+1. **Install PostgreSQL:**
+
+   Make sure you have PostgreSQL installed on your system. You can download and install it from the [PostgreSQL official website](https://www.postgresql.org/download/).
+
+2. **Configure Database Connection:**
+
+   Open the `app.py` file and locate the `app.config` section. Update the `SQLALCHEMY_DATABASE_URI` to connect to your PostgreSQL database:
+
+   ```python
+   app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://myuser:mypassword@localhost/webappdb'
+
 
 # Launching the Application
 
@@ -103,3 +121,4 @@ The application uses Leaflet.js to visualize vehicle data on an interactive map.
 # CSV Data Folder
 
 The CSV data folder (csv) is used to store the CSV files that contain vehicle data for uploading. After data is successfully uploaded, the CSV file is moved to the processed folder.
+
