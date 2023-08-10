@@ -9,8 +9,8 @@ services:
     environment:
       - FLASK_ENV=development
       - FLASK_APP=app.py
-    depends_on:
-      - database
+    command: ["./wait-for-it.sh", "database:3306", "--", "python", "app.py"]
+    
   database:
     image: mysql:latest
     environment:

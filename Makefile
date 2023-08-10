@@ -1,9 +1,9 @@
 install:
 	pip install -r requirements.txt
 
-stop:
+down:
 	docker-compose down
 
 
-build:
+up:
 	docker-compose up --build
