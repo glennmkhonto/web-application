@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.secret_key = "Secret key"
 
 # Run without Docker
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:password@localhost/webappdb'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://sibusisomkhonto:change%4090@localhost/webappdb'
 
 #Run with Docker
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:password@database/webappdb'
@@ -58,18 +58,9 @@ def upload_data_from_csv():
     else:
         print("CSV file not available.")
 
-# Function to clear cached data in Redis
-def clear_cached_data():
-    redis_client.delete('cached_data')
-
 @app.route('/')
 def Index():
-    cached_data = redis_client.get('catched_data')
-    if cached_data:
-        all_data = eval(cached_data.decode())
-    else:
-        all_data = Data.query.all()
-        redis_client.set('cached_data', repr(all_data))
+    all_data = Data.query.all()
     return render_template("index.html", vehicles=all_data)
 
 @app.route('/insert', methods=['POST'])
@@ -103,7 +94,6 @@ def insert():
             db.session.commit()
             
             flash("Vehicle Added Successfully")
-            clear_cached_data()
 
     except OperationalError as e:
         db.session.rollback()  # Rollback the transaction
@@ -147,7 +137,6 @@ def update():
                 
                 db.session.commit()
                 flash("Vehicle Updated Successfully")
-                clear_cached_data()
 
     except OperationalError as e:
         db.session.rollback()  # Rollback the transaction
@@ -161,7 +150,6 @@ def delete(id):
     db.session.delete(my_data)
     db.session.commit()
     flash(f"Vehicle for this Vehicle ID {my_data.vehicleid} Deleted Successfully")
-    clear_cached_data()
     return redirect(url_for('Index'))
 
 
