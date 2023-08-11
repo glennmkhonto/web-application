@@ -11,7 +11,10 @@ from cachedData import redis_client
 app = Flask(__name__)
 app.secret_key = "Secret key"
 
-# Set the database connection string
+# Run without Docker
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:password@localhost/webappdb'
+
+#Run with Docker
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://username:password@database/webappdb'
 
 # Disable tracking modifications to reduce overhead

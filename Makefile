@@ -2,8 +2,8 @@ install:
 	pip install -r requirements.txt
 
 down:
-	docker-compose down
+	docker-compose -f docker-compose.yml down
 
 
 up:
-	docker-compose up --build
+	docker-compose -f docker-compose.yml up --build -d

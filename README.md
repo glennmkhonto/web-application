@@ -97,6 +97,18 @@ Access the App:
 *Open your web browser and navigate to http://localhost:5000.
 *You can manage and visualize vehicle data using the provided web interface.
 
+## Running the Application without Docker Compose
+
+1. Make sure postgresql is running by using this command:
+        sudo service postgresql status
+If it is down use this command to start the postgresql server:
+        sudo service postgresql start
+
+2. On the app.py uncomment "Run without Docker" 
+
+
+
+
 ## Running the Application with Docker Compose
 
 To test the application using Docker Compose, follow these steps:
